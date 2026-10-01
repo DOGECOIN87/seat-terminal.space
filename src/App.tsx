@@ -119,11 +119,7 @@ function DeparturesBoard({ feed }: { feed: Feed }) {
   );
 }
 
-function GateCard({ line, quote }: { line: Line; quote: Quote }) {
-  const world = worldFor(line.worlds, quote.marketCap);
-  const dest = destination(line, quote);
-  const image = world?.image ?? line.exterior;
-  const vehicle = line.id === 'airlines' ? 'airliner' : 'train';
+function GateEmbed({ line }: { line: Line }) {
   return (
     <article className={`gate gate--${line.id}`} aria-labelledby={`gate-${line.id}-title`}>
       <div className="gate__top">
@@ -132,34 +128,17 @@ function GateCard({ line, quote }: { line: Line; quote: Quote }) {
       </div>
       <h3 id={`gate-${line.id}-title`} className="gate__name">{line.name}</h3>
       <p className="gate__service mono">{line.service} · {line.serviceNote}</p>
-      <figure className="gate__shot">
-        <img
-          src={image}
-          alt={`Screenshot: the ${line.name} ${vehicle}${world ? ` — ${world.name}` : ''}`}
-          width="1200"
-          height="418"
+      <div className="gate__embed">
+        <iframe
+          src={line.url}
+          title={`${line.name} — live`}
           loading="lazy"
-          decoding="async"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+          className="gate__iframe"
         />
-      </figure>
-      <p className="gate__tagline">{line.tagline}</p>
-      <p className="gate__pitch">{line.pitch}</p>
-      <dl className="gate__stats">
-        <div>
-          <dt>Market cap</dt>
-          <dd className="mono">{formatCap(quote.marketCap)}</dd>
-        </div>
-        <div>
-          <dt>Destination</dt>
-          <dd>{dest.world}{dest.detail && <span className="gate__detail dim">{dest.detail}</span>}</dd>
-        </div>
-        <div>
-          <dt>{line.id === 'railway' ? '5-min grade' : '5-min move'}</dt>
-          <dd className="mono"><Change pct={quote.change5m} /></dd>
-        </div>
-      </dl>
-      <a className="btn btn--board" href={line.url}>
-        Board at {host(line.url)} <span aria-hidden="true">→</span>
+      </div>
+      <a className="btn btn--board" href={line.url} target="_blank" rel="noopener noreferrer">
+        Open {host(line.url)} <span aria-hidden="true">↗</span>
       </a>
     </article>
   );
@@ -216,7 +195,7 @@ export default function App() {
           </div>
           <div className="gates">
             {LINES.map((line) => (
-              <GateCard key={line.id} line={line} quote={feed.quotes[line.mint] ?? EMPTY_QUOTE} />
+              <GateEmbed key={line.id} line={line} />
             ))}
           </div>
         </section>
