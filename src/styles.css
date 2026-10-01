@@ -555,6 +555,21 @@ a:hover { color: #6fe2fa; }
   letter-spacing: 0.12em;
   color: var(--accent);
 }
+.gate__embed {
+  margin: 1rem 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.gate__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
 .gate__shot {
   margin: 1rem 0 0;
   border-radius: 12px;
