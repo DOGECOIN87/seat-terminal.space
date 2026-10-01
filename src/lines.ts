@@ -53,7 +53,7 @@ export const LINES: readonly Line[] = [
     serviceNote: 'Nonstop',
     url: 'https://seat-airlines.space',
     repo: 'https://github.com/DOGECOIN87/Seat-Airlines',
-    logo: '/seat-airlines-logo.svg',
+    logo: '/seat-airlines-logo.png',
     logoAlt: 'Seat Airlines logo',
     exterior: '/img/airlines-exterior.jpg',
     tagline: 'Hold more. Fly higher.',
