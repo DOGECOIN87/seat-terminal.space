@@ -561,14 +561,17 @@ a:hover { color: #6fe2fa; }
   overflow: hidden;
   position: relative;
   aspect-ratio: 16 / 10;
+  container-type: inline-size;
   background: #000;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 .gate__iframe {
-  width: 100%;
-  height: 100%;
+  width: 1180px;
+  height: 737.5px;
   border: none;
   display: block;
+  transform: scale(calc(100cqw / 1180px));
+  transform-origin: top left;
 }
 .gate__shot {
   margin: 1rem 0 0;
